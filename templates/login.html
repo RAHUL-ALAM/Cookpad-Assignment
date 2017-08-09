@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div style="width: 30%; margin: 5% auto; padding: 3%; border-radius: 3%;background-color: #DFDFDF;">
+	{% if err %}
+		<p style="text-align: center; color: red;"> {{err}} </p>
+	{% endif %}
+	<form class="form-horizontal" method="post" action="/login/">
+	{% csrf_token %}
+	  <div class="form-group">
+	    <label class="control-label col-sm-3" for="username">Username:</label>
+	    <div class="col-sm-9">
+	      {{ form.username }}
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label col-sm-3" for="password">Password:</label>
+	    <div class="col-sm-9"> 
+	      {{ form.password }}
+	    </div>
+	  </div>
+	  <div class="form-group"> 
+	    <div class="col-sm-offset-3 col-sm-9">
+	      <button type="submit" class="btn btn-primary">Submit</button>
+	    </div>
+	  </div>
+	</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{% if images %}
+
+<div style="width: 90%; margin: 2% auto; padding: 1%;">
+
+<h1> {{this_user.username}}'s profile </h1>
+
+{% if this_user == user %}
+<p style="padding-left: 2%; font-weight: bold; font-size: 22px;"> Your Images</p>
+{% endif %}
+	{% load static %}
+	{% for image in images %}
+	<div class="col-sm-3" style="margin-top: 3%; padding: 1%; box-shadow: 1px 1px 5px #888888;">
+		<a href="/image/{{image.id}}/">
+		<img src="{{image.img.url}}" style="padding: 1%; width: 100%;" height="200px;">
+		</a>
+		likes : {{image.likes}} <br>
+		{% if image.user == user %}
+		<a href="image/delete-{{image.id}}/"><i class="fa fa-trash-o"></i> &nbsp delete</a><br>
+		{% endif %}
+		{% if all %}
+		{%  if image.user == user %}
+		posted by : you
+		{% else %}
+		posted by : <a href="/profile/{{image.user.username}}/">{{image.user}}</a>
+		{% endif %}
+		{% endif %}
+	</div>
+	<div class="col-sm-1"></div>
+	{% endfor %}
+</div>
+
+{% endif %}
+
+{% endblock %}
